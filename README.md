@@ -115,5 +115,14 @@ Hands-on lab to deploy **Windows + Ubuntu VMs in Azure**, capture traffic with *
 
 ---
 
-## 📁 Repo Layout
+
+## 🔗 Reproduction Steps
+See **[IMPLEMENTATION.md](./IMPLEMENTATION.md)** for exact Azure CLI, PowerShell, and Wireshark filters.
+
+## 🧠 Key Takeaways
+- Safe cloud deployment + teardown  
+- Captured & interpreted 5 protocols in Wireshark  
+- Tested NSG firewall rules with evidence  
+- Practiced troubleshooting: symptom → capture → fix
+
 
