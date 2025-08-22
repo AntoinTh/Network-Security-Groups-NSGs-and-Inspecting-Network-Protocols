@@ -1,58 +1,119 @@
-# Network-Security-Groups-NSGs-and-Inspecting-Network-Protocols
-<p align="center">
-<img src="https://i.imgur.com/Ua7udoS.png" alt="Traffic Examination"/>
-</p>
+# 🌐 Azure Virtual Network Traffic Analysis — Portfolio Lab
 
-<h1>Network Security Groups (NSGs) and Inspecting Traffic Between Azure Virtual Machines</h1>
-In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups. <br />
+## 📌 Overview
+Hands-on lab to deploy **Windows + Ubuntu VMs in Azure**, capture traffic with **Wireshark**, and verify how **Network Security Group (NSG)** rules affect connectivity. Built to be **recruiter-friendly** and **evidence-driven**.
 
+## 🎯 Objectives
+- Deploy core Azure resources (RG, VNet/Subnet, VMs)
+- Capture & analyze **ICMP, SSH, DHCP, DNS, RDP** traffic in Wireshark
+- Prove how NSG firewall rules impact traffic flow
+- Document reproducible steps and **evidence screenshots**
 
-<h2>Video Demonstration</h2>
+## 🛠️ Tools & Tech
+- **Azure**: Resource Groups, VNets, Subnets, Network Security Groups (NSG), Network Watcher  
+- **OS**: Windows 10 VM (Wireshark host), Ubuntu VM (target)  
+- **Protocols**: ICMP, SSH, DHCP, DNS, RDP  
+- **Access**: RDP (Windows), SSH (Linux)
 
-- ### [YouTube: Azure Virtual Machines, Wireshark, and Network Security Groups](https://www.youtube.com)
+---
 
-<h2>Environments and Technologies Used</h2>
+## ✅ Lab Checklist
+- [ ] Create Resource Group (RG)
+- [ ] Create VNet + Subnet
+- [ ] Deploy Windows 10 VM (Wireshark host)
+- [ ] Deploy Ubuntu VM (target)
+- [ ] Confirm both VMs share the same VNet/Subnet (Network Watcher)
+- [ ] RDP into Windows VM
+- [ ] Install Wireshark
+- [ ] Observe **ICMP** traffic (allow → block via NSG → allow)
+- [ ] Observe **SSH** traffic (Windows → Ubuntu)
+- [ ] Observe **DHCP** DORA after `ipconfig /renew`
+- [ ] Observe **DNS** lookups via `nslookup`
+- [ ] Observe **RDP** continuous stream
+- [ ] Cleanup: delete Resource Group
 
-- Microsoft Azure (Virtual Machines/Compute)
-- Remote Desktop
-- Various Command-Line Tools
-- Various Network Protocols (SSH, RDH, DNS, HTTP/S, ICMP)
-- Wireshark (Protocol Analyzer)
+---
 
-<h2>Operating Systems Used </h2>
+## 📷 Evidence / Screenshots (placeholders + guidance)
 
-- Windows 10 (21H2)
-- Ubuntu Server 20.04
+> Place images in `./screenshots/` and number them so the story flows in order.
 
-<h2>High-Level Steps</h2>
+### 01 — Resource Group Created
+![RG Created](./screenshots/01-resource-group.png)  
+**What to capture:** Azure Portal > Resource groups > summary.  
+**Why:** Proves environment isolation and cleanup readiness.  
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+### 02 — VNet & Subnet Summary
+![VNet Summary](./screenshots/02-vnet-subnet.png)  
+**What to capture:** VNet address space + Subnet range.  
+**Why:** Shows private IP design for VM-to-VM traffic.  
 
-<h2>Actions and Observations</h2>
+### 03 — Windows VM Deployed
+![Windows VM](./screenshots/03-windows-vm.png)  
+**What to capture:** VM overview (NIC, VNet/Subnet, private IP).  
+**Why:** Confirms Wireshark host.  
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+### 04 — Ubuntu VM Deployed
+![Ubuntu VM](./screenshots/04-ubuntu-vm.png)  
+**What to capture:** VM overview.  
+**Why:** Confirms ICMP/SSH target.  
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+### 05 — RDP Session
+![RDP Session](./screenshots/05-rdp-session.png)  
+**What to capture:** Windows VM desktop via RDP.  
+**Why:** Evidence analysis happens inside VM.  
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+### 06 — Wireshark Installed
+![Wireshark Installed](./screenshots/06-wireshark-installed.png)  
+**What to capture:** Wireshark open/about screen.  
+**Why:** Proof of tool readiness.  
+
+### 07 — ICMP Allowed (Ping OK)
+![ICMP Allowed](./screenshots/07-icmp-allow.png)  
+**What to capture:** Wireshark ICMP filter + successful ping.  
+**Why:** Baseline connectivity.  
+
+### 08 — NSG Rule Blocking ICMP
+![NSG Deny ICMP](./screenshots/08-nsg-deny-icmp.png)  
+**What to capture:** NSG inbound rule (deny ICMP).  
+**Why:** Shows applied firewall control.  
+
+### 09 — ICMP Blocked
+![ICMP Blocked](./screenshots/09-icmp-blocked.png)  
+**What to capture:** Wireshark ICMP with requests only.  
+**Why:** Evidence of traffic drop.  
+
+### 10 — ICMP Restored
+![ICMP Restored](./screenshots/10-icmp-restored.png)  
+**What to capture:** Replies return after NSG rule removed.  
+**Why:** Confirms rollback.  
+
+### 11 — SSH Session
+![SSH Session](./screenshots/11-ssh-session.png)  
+**What to capture:** SSH into Ubuntu + Wireshark SSH traffic.  
+**Why:** Validates east-west encrypted traffic.  
+
+### 12 — DHCP Renewal
+![DHCP DORA](./screenshots/12-dhcp-dora.png)  
+**What to capture:** `ipconfig /renew` + Wireshark DHCP DORA sequence.  
+**Why:** Confirms dynamic IP assignment.  
+
+### 13 — DNS Queries
+![DNS Queries](./screenshots/13-dns-queries.png)  
+**What to capture:** nslookup google.com/disney.com + Wireshark DNS.  
+**Why:** Shows name resolution.  
+
+### 14 — RDP Stream
+![RDP Stream](./screenshots/14-rdp-traffic.png)  
+**What to capture:** Wireshark tcp.port==3389 traffic.  
+**Why:** Explains constant stream behavior.  
+
+### 15 — Cleanup Confirmation
+![RG Deleted](./screenshots/15-cleanup.png)  
+**What to capture:** Resource Group deletion complete.  
+**Why:** Proves environment cleanup.  
+
+---
+
+## 📁 Repo Layout
+
